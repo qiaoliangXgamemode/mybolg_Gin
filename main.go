@@ -21,15 +21,12 @@ func main() {
 	// r.GET("/", func(context *gin.Context) {
 	// 	context.String(http.StatusOK, "hellow")
 	// })
+
 	r.GET("/ArticleList", Parser.ListResponseJSON)
 
 	r.GET("/articleContext/:title", Parser.ParserMarkdown)
 	flag.Parse()
 
 	slog.Info("HTTP/TCP", "Listen", *ListenPort)
-	Handler(r)
-}
-
-func Handler(r *gin.Engine) {
 	r.Run(fmt.Sprintf(":%v", *ListenPort))
 }
