@@ -11,7 +11,7 @@
     ],
     "routes": [
       {
-        "src": "/api/route",
+        "src": "/ArticleList",
         "dest": "/api/route.go"
       }
     ]
