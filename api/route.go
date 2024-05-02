@@ -19,7 +19,7 @@ var (
 
 var ListenPort = flag.Int("port", 8080, "Listen Port")
 
-func ini() {
+func init() {
 	// TODO
 	r := gin.Default()
 	// r.GET("/", func(context *gin.Context) {
