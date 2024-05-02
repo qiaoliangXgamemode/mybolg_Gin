@@ -25,6 +25,7 @@ func init() {
 	// r.GET("/", func(context *gin.Context) {
 	// 	context.String(http.StatusOK, "hellow")
 	// })
+	r.GET("/api/route", Parser.ListResponseJSON)
 	r.GET("/", Parser.ListResponseJSON)
 	r.GET("/ArticleList", Parser.ListResponseJSON)
 
