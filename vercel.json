@@ -3,11 +3,7 @@
     "builds": [
       {
         "use": "@vercel/go",
-        "src": "/api/route.go",
-        "config": {
-          "zeroConfig": true
-        }
-      }
+        "src": "/api/route.go"
     ],
     "routes": [
       {

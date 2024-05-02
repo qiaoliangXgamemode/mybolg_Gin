@@ -1,45 +1,41 @@
 package api
 
 import (
-	"fmt"
+	"Myblog/Parser"
+	"flag"
+	"log/slog"
 	"net/http"
-	"strings"
 
 	"github.com/gin-gonic/gin"
 )
 
-var router *gin.Engine
-
-var apiUrl = "https://api.telegram.org"
-
 func init() {
-	router = gin.Default()
-	router.Any("/*path", func(context *gin.Context) {
-		uri := context.Param("path")
-		if !strings.Contains(uri, "bot") {
-			context.String(http.StatusNotFound, "404 Not found")
-			return
-		}
-		url := apiUrl + uri
-		req, err := http.NewRequestWithContext(context, context.Request.Method, url, context.Request.Body)
-		if err != nil {
-			fmt.Println(err)
-			context.String(http.StatusBadRequest, err.Error())
-			return
-		}
-		req.Header = context.Request.Header
-		req.PostForm = context.Request.PostForm
-		req.Form = context.Request.Form
-		resp, err := http.DefaultClient.Do(req)
-		if err != nil {
-			fmt.Println(err)
-			context.String(http.StatusBadRequest, err.Error())
-			return
-		}
-		context.DataFromReader(resp.StatusCode, resp.ContentLength, "application/json", resp.Body, nil)
-	})
+
 }
 
-func Listen(w http.ResponseWriter, r *http.Request) {
-	router.ServeHTTP(w, r)
+var (
+	r *gin.Engine
+)
+
+var ListenPort = flag.Int("port", 8080, "Listen Port")
+
+func init() {
+	// TODO
+	r := gin.Default()
+	// r.GET("/", func(context *gin.Context) {
+	// 	context.String(http.StatusOK, "hellow")
+	// })
+	r.GET("/api/route", Parser.ListResponseJSON)
+	r.GET("/", Parser.ListResponseJSON)
+	r.GET("/ArticleList", Parser.ListResponseJSON)
+
+	r.GET("/articleContext/:title", Parser.ParserMarkdown)
+	flag.Parse()
+
+	slog.Info("HTTP/TCP", "Listen", *ListenPort)
+
+}
+
+func Handler(w http.ResponseWriter, rw *http.Request) {
+	r.ServeHTTP(w, rw)
 }
