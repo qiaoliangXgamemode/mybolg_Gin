@@ -2,8 +2,6 @@ package api
 
 import (
 	"Myblog/Parser"
-	"flag"
-	"log/slog"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -17,7 +15,7 @@ var (
 	r *gin.Engine
 )
 
-var ListenPort = flag.Int("port", 8080, "Listen Port")
+// var ListenPort = flag.Int("port", 8080, "Listen Port")
 
 func init() {
 	// TODO
@@ -25,14 +23,15 @@ func init() {
 	// r.GET("/", func(context *gin.Context) {
 	// 	context.String(http.StatusOK, "hellow")
 	// })
-	r.GET("/api/route", Parser.ListResponseJSON)
-	r.GET("/", Parser.ListResponseJSON)
-	r.GET("/ArticleList", Parser.ListResponseJSON)
+	r.Any("/api/route", Parser.ListResponseJSON)
+	// r.GET("/api/route", Parser.ListResponseJSON)
+	// r.GET("/", Parser.ListResponseJSON)
+	// r.GET("/ArticleList", Parser.ListResponseJSON)
 
-	r.GET("/articleContext/:title", Parser.ParserMarkdown)
-	flag.Parse()
+	// r.GET("/articleContext/:title", Parser.ParserMarkdown)
+	// flag.Parse()
 
-	slog.Info("HTTP/TCP", "Listen", *ListenPort)
+	// slog.Info("HTTP/TCP", "Listen", *ListenPort)
 
 }
 
