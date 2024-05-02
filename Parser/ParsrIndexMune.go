@@ -19,7 +19,7 @@ type Article struct {
 }
 
 func ListResponseJSON(c *gin.Context) {
-	JsonFile, err := os.Open("../src/article.json")
+	JsonFile, err := os.Open("/src/article.json")
 	defer JsonFile.Close()
 	Bytes, _ := ioutil.ReadAll(JsonFile)
 	if err != nil {
