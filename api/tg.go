@@ -13,7 +13,7 @@ var apiUrl = "https://api.telegram.org"
 
 func init() {
 	router = gin.Default()
-	router.Any("/", Parser.ListResponseJSON)
+	router.Any("/api/tg", Parser.ListResponseJSON)
 }
 
 func Listen(w http.ResponseWriter, r *http.Request) {
