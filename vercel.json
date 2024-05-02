@@ -4,7 +4,8 @@
       {
         "use": "@vercel/go",
         "src": "/api/route.go"
-    ],
+  }
+],
     "routes": [
       {
         "src": "/ArticleList",
