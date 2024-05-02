@@ -11,8 +11,8 @@
     ],
     "routes": [
       {
-        "src": "/(.*)",
-        "dest": "/api/route"
+        "src": "/*",
+        "dest": "/api/route.go"
       }
     ]
   }
